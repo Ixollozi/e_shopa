@@ -22,7 +22,7 @@
                             <label>Quantity</label><br>
                             <form method="POST" action="/add-product-to-cart/{{ product.id }}">
                                 {% csrf_token %}
-                                <input type="number" name="pr_count" min="1" max="{{ product.product_amount }}">
+                                <input type="number" value="1" name="pr_count" min="1" max="{{ product.product_amount }}">
                                 <button type="submit" class="btn btn-fefault cart">
                                     <i class="fa fa-shopping-cart"></i>
                                           Добавить в корзину

@@ -63,7 +63,7 @@
 							<li>Shipping Cost <span>Free</span></li>
 							<li>Total <span>{{ total }} сум</span></li>
 						</ul>
-							<form method="POST" action="/send_to_tg/{{ user.id }}">
+							<form method="POST" action="/send_to_tg">
 								{% csrf_token %}
 								<button>Оформить заказ</button>
 							</form>

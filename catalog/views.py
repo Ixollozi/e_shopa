@@ -67,13 +67,17 @@ def complete_order(request):
     # вызываем корзину пользователя
     user_cart = models.UserCart.objects.filter(user_id=request.user.id)
     result_message = 'новый заказ(из сайта)\n\n'
+    total = 0
     if request.method == 'POST':
         for cart in user_cart:
-            result_message += f"название товара{cart.user_pr}\n" \
-                          f"количество:{cart.user_pr_quan}"
-    handler.bot.send_message(-1001982414088, result_message)
-    user_cart.delete()
-    return redirect(request, 'user_cart.html', {"user_cart": user_cart})
+            result_message += f"название товара:{cart.user_product}\n" \
+                          f"количество:{cart.user_product_quantity}\n"
+            total += cart.user_product.price * cart.user_product_quantity
+        result_message += f'итог: {total}'
+        handler.bot.send_message(-1001982414088, result_message)
+        user_cart.delete()
+        return redirect('/')
+    return render(request, 'user_cart.html', {"user_cart": user_cart})
 
 
 def delete_from_cart(request, pk):
